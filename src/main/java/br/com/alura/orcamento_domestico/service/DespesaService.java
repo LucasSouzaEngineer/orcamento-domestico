@@ -3,6 +3,7 @@ package br.com.alura.orcamento_domestico.service;
 import br.com.alura.orcamento_domestico.dto.despesaDTO.CadastroDespesaDTO;
 import br.com.alura.orcamento_domestico.dto.despesaDTO.DadosAtualizacaoDespesaDTO;
 import br.com.alura.orcamento_domestico.dto.despesaDTO.DetalheDespesaDTO;
+import br.com.alura.orcamento_domestico.dto.resumoMesDTO.TotalCategoriaDTO;
 import br.com.alura.orcamento_domestico.model.Despesa;
 import br.com.alura.orcamento_domestico.repository.DespesaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,8 +11,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.YearMonth;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -72,7 +75,15 @@ public class DespesaService {
         return converteLista(despesas);
     }
 
+    public BigDecimal obterSomaReceitaMes(LocalDate inicioMes, LocalDate fimMes) {
+        return repository.obterSomaDespesaMes(inicioMes, fimMes);
+    }
+
+    public List<TotalCategoriaDTO> obterDespesaCategoriaMes(LocalDate inicioMes, LocalDate fimMes) {
+        return repository.obterDespesaPorCategoria(inicioMes, fimMes);
+    }
+
     private Page<DetalheDespesaDTO> converteLista(Page<Despesa> despesas){
-        return despesas.map(d -> new DetalheDespesaDTO(d.getId(), d.getDescricao(), d.getValor(), d.getData(), d.getCategoria()));
+        return despesas.map(DetalheDespesaDTO::new);
     }
 }

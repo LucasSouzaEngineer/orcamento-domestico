@@ -1,6 +1,5 @@
 package br.com.alura.orcamento_domestico.service;
 
-import br.com.alura.orcamento_domestico.dto.despesaDTO.CadastroDespesaDTO;
 import br.com.alura.orcamento_domestico.dto.receitaDTO.CadastroReceitaDTO;
 import br.com.alura.orcamento_domestico.dto.receitaDTO.DadosAtualizacaoReceitaDTO;
 import br.com.alura.orcamento_domestico.dto.receitaDTO.DetalheReceitaDTO;
@@ -11,9 +10,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.YearMonth;
 import java.util.Optional;
 
@@ -64,8 +62,12 @@ public class ReceitaService {
         return converteLista(repository.listarPorMes(inicioMes, fimMes, paginacao));
     }
 
-    private Page<DetalheReceitaDTO> converteLista(Page<Receita> receitas){
-       return receitas.map(r ->
-               new DetalheReceitaDTO(r.getId(), r.getDescricao(), r.getValor(), r.getData()));
+    public BigDecimal obterSomaReceitaMes(LocalDate inicioMes, LocalDate fimMes) {
+        return repository.obterSomaReceitaMes(inicioMes, fimMes);
     }
+
+    private Page<DetalheReceitaDTO> converteLista(Page<Receita> receitas){
+       return receitas.map(DetalheReceitaDTO::new);
+    }
+
 }
