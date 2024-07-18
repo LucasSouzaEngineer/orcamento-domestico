@@ -16,14 +16,14 @@ public class MetaOrcamentoService {
     @Autowired
     private MetaOrcamentoRepository metaOrcamentoRepository;
 
-    public List<DetalheMetaOrcamentoDTO> cadastrar(List<CadastroMetasOrcamentoDTO> dados) throws ValidacaoException{
+    public List<DetalheMetaOrcamentoDTO> cadastrar(List<CadastroMetasOrcamentoDTO> dados){
         double somaPorcentagem = dados.stream().map(CadastroMetasOrcamentoDTO::porcentagem).reduce( 0.0, Double::sum);
         if (somaPorcentagem != 100.0){
             throw new ValidacaoException("Soma das metas deve ser igual a 100%");
         }
 
         List<MetaOrcamento> metasOrcamento = converterListaDtoParaMetas(dados);
-        metaOrcamentoRepository.deleteAll();
+        metaOrcamentoRepository.limparMetas();
         metasOrcamento.forEach(metaOrcamento -> metaOrcamentoRepository.save(metaOrcamento));
         return converterListaMetasParaDto(metaOrcamentoRepository.findAll());
     }

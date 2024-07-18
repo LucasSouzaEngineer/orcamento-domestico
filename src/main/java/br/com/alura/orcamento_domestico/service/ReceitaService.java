@@ -1,5 +1,6 @@
 package br.com.alura.orcamento_domestico.service;
 
+import br.com.alura.orcamento_domestico.dto.AnoMesDTO;
 import br.com.alura.orcamento_domestico.dto.receitaDTO.CadastroReceitaDTO;
 import br.com.alura.orcamento_domestico.dto.receitaDTO.DadosAtualizacaoReceitaDTO;
 import br.com.alura.orcamento_domestico.dto.receitaDTO.DetalheReceitaDTO;
@@ -12,13 +13,14 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.YearMonth;
 import java.util.Optional;
 
 @Service
 public class ReceitaService {
     @Autowired
     private ReceitaRepository repository;
+    @Autowired
+    private ConversaoDateService conversaoDateService;
 
     public Page<DetalheReceitaDTO> obterListaReceita(Pageable paginacao) {
         return converteLista(repository.findAll(paginacao));
@@ -56,9 +58,9 @@ public class ReceitaService {
         return new DetalheReceitaDTO(receita);
     }
 
-    public Page<DetalheReceitaDTO> obterListaReceitaMes(int ano, int mes, Pageable paginacao) {
-        LocalDate inicioMes = LocalDate.of(ano, mes, 1);
-        LocalDate fimMes = LocalDate.of(ano, mes, YearMonth.of(ano, mes).lengthOfMonth());
+    public Page<DetalheReceitaDTO> obterListaReceitaMes(AnoMesDTO anoMes, Pageable paginacao) {
+        LocalDate inicioMes = conversaoDateService.obterInicioMes(anoMes);
+        LocalDate fimMes = conversaoDateService.obterFimMes(anoMes);
         return converteLista(repository.listarPorMes(inicioMes, fimMes, paginacao));
     }
 

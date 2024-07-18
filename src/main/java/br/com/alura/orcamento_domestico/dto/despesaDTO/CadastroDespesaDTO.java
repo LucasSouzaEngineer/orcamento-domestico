@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 public record CadastroDespesaDTO(
         @NotBlank
@@ -13,7 +14,8 @@ public record CadastroDespesaDTO(
         @NotNull
         BigDecimal valor,
         @NotNull
-        DadosDataDTO data,
+        LocalDate data,
+        @NotNull
         CategoriaDespesa categoria //Usado apenas para despesa
 ){
 }

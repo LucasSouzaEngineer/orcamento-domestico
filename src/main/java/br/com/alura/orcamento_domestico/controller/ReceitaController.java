@@ -1,5 +1,6 @@
 package br.com.alura.orcamento_domestico.controller;
 
+import br.com.alura.orcamento_domestico.dto.AnoMesDTO;
 import br.com.alura.orcamento_domestico.dto.despesaDTO.CadastroDespesaDTO;
 import br.com.alura.orcamento_domestico.dto.despesaDTO.DadosAtualizacaoDespesaDTO;
 import br.com.alura.orcamento_domestico.dto.despesaDTO.DetalheDespesaDTO;
@@ -44,9 +45,9 @@ public class ReceitaController {
         return ResponseEntity.ok(service.obterReceita(id));
     }
 
-    @GetMapping("/{ano}/{mes}")
-    public ResponseEntity<Page<DetalheReceitaDTO>> obterListaReceitasMes(@PathVariable int ano, @PathVariable int mes, Pageable paginacao){
-        var page = service.obterListaReceitaMes(ano, mes, paginacao);
+    @GetMapping("/mes")
+    public ResponseEntity<Page<DetalheReceitaDTO>> obterListaReceitasMes(@RequestBody @Valid AnoMesDTO anoMes, Pageable paginacao){
+        var page = service.obterListaReceitaMes(anoMes, paginacao);
 
         return ResponseEntity.ok(page);
     }

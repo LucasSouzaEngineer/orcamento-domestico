@@ -1,6 +1,7 @@
 package br.com.alura.orcamento_domestico.model;
 
 import br.com.alura.orcamento_domestico.dto.DadosDataDTO;
+import br.com.alura.orcamento_domestico.dto.despesaDTO.CadastroDespesaDTO;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
@@ -20,17 +21,11 @@ public class Despesa {
     public Despesa() {
     }
 
-    public Despesa(String descricao, BigDecimal valor, DadosDataDTO data) {
-        this.descricao = descricao;
-        this.valor = valor;
-        this.setData(data);
-    }
-
-    public Despesa(String descricao, BigDecimal valor, DadosDataDTO data, CategoriaDespesa categoria) {
-        this.descricao = descricao;
-        this.valor = valor;
-        this.setData(data);
-        this.categoria = categoria;
+    public Despesa(CadastroDespesaDTO dadosCadastro) {
+        this.descricao = dadosCadastro.descricao();
+        this.valor = dadosCadastro.valor();
+        this.data = dadosCadastro.data();
+        this.categoria = dadosCadastro.categoria();
     }
 
     public Long getId() {
@@ -57,8 +52,8 @@ public class Despesa {
         this.valor = valor;
     }
 
-    public void setData(DadosDataDTO data) {
-        this.data = LocalDate.of(data.ano(), data.mes(), data.dia());
+    public void setData(LocalDate data) {
+        this.data = data;
     }
 
     public CategoriaDespesa getCategoria() {
