@@ -1,6 +1,5 @@
 package br.com.alura.orcamento_domestico.model;
 
-import br.com.alura.orcamento_domestico.dto.DadosDataDTO;
 import br.com.alura.orcamento_domestico.dto.despesaDTO.CadastroDespesaDTO;
 import jakarta.persistence.*;
 

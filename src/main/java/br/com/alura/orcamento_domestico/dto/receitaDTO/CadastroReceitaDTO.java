@@ -1,10 +1,10 @@
 package br.com.alura.orcamento_domestico.dto.receitaDTO;
 
-import br.com.alura.orcamento_domestico.dto.DadosDataDTO;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 public record CadastroReceitaDTO(
         @NotBlank
@@ -12,6 +12,6 @@ public record CadastroReceitaDTO(
         @NotNull
         BigDecimal valor,
         @NotNull
-        DadosDataDTO data
+        LocalDate data
 ){
 }

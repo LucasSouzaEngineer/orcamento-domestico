@@ -1,6 +1,5 @@
 package br.com.alura.orcamento_domestico.model;
 
-import br.com.alura.orcamento_domestico.dto.DadosDataDTO;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
@@ -19,10 +18,10 @@ public class Receita {
     public Receita() {
     }
 
-    public Receita(String descricao, BigDecimal valor, DadosDataDTO data) {
+    public Receita(String descricao, BigDecimal valor, LocalDate data) {
         this.descricao = descricao;
         this.valor = valor;
-        this.data = LocalDate.of(data.ano(), data.mes(), data.dia());
+        this.data = data;
     }
 
     public Long getId() {
@@ -49,7 +48,7 @@ public class Receita {
         this.valor = valor;
     }
 
-    public void setData(DadosDataDTO data) {
-        this.data = LocalDate.of(data.ano(), data.mes(), data.dia());
+    public void setData(LocalDate data) {
+        this.data = data;
     }
 }

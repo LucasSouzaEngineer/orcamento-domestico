@@ -1,6 +1,5 @@
 package br.com.alura.orcamento_domestico.dto.despesaDTO;
 
-import br.com.alura.orcamento_domestico.dto.DadosDataDTO;
 import br.com.alura.orcamento_domestico.model.CategoriaDespesa;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
