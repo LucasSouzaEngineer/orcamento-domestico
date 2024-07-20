@@ -1,11 +1,9 @@
 package br.com.alura.orcamento_domestico.controller;
 
 import br.com.alura.orcamento_domestico.dto.metasOrcamentoDTO.CadastroMetasOrcamentoDTO;
-import br.com.alura.orcamento_domestico.dto.metasOrcamentoDTO.ListaCadastroMetasOrcamentoDTO;
 import br.com.alura.orcamento_domestico.dto.metasOrcamentoDTO.DetalheMetaOrcamentoDTO;
 import br.com.alura.orcamento_domestico.service.MetaOrcamentoService;
 import jakarta.validation.Valid;
-import jakarta.validation.ValidationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;

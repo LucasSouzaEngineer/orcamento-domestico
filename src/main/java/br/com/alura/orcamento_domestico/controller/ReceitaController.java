@@ -1,9 +1,6 @@
 package br.com.alura.orcamento_domestico.controller;
 
 import br.com.alura.orcamento_domestico.dto.AnoMesDTO;
-import br.com.alura.orcamento_domestico.dto.despesaDTO.CadastroDespesaDTO;
-import br.com.alura.orcamento_domestico.dto.despesaDTO.DadosAtualizacaoDespesaDTO;
-import br.com.alura.orcamento_domestico.dto.despesaDTO.DetalheDespesaDTO;
 import br.com.alura.orcamento_domestico.dto.receitaDTO.CadastroReceitaDTO;
 import br.com.alura.orcamento_domestico.dto.receitaDTO.DadosAtualizacaoReceitaDTO;
 import br.com.alura.orcamento_domestico.dto.receitaDTO.DetalheReceitaDTO;

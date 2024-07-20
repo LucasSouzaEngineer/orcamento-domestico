@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class DespesaService {
@@ -29,12 +28,8 @@ public class DespesaService {
     }
 
     public DetalheDespesaDTO obterDespesa(Long id) {
-        Optional<Despesa> despesaOptional = despesaRepository.findById(id);
-        if(despesaOptional.isPresent()){
-            Despesa despesa = despesaOptional.get();
-            return new DetalheDespesaDTO(despesa);
-        }
-        return null;
+        Despesa despesa = despesaRepository.getReferenceById(id);
+        return new DetalheDespesaDTO(despesa);
     }
 
     public void deletarDespesa(Long id) {

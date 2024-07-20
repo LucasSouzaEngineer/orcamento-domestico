@@ -13,39 +13,36 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Optional;
 
 @Service
 public class ReceitaService {
     @Autowired
-    private ReceitaRepository repository;
+    private ReceitaRepository receitaRepository;
     @Autowired
     private ConversaoDateService conversaoDateService;
 
     public Page<DetalheReceitaDTO> obterListaReceita(Pageable paginacao) {
-        return converteLista(repository.findAll(paginacao));
+        return converteLista(receitaRepository.findAll(paginacao));
     }
 
     public DetalheReceitaDTO obterReceita(Long id) {
-        Optional<Receita> receitaOptional = repository.findById(id);
-        if (receitaOptional.isPresent()){
-            Receita receita = receitaOptional.get();
-            return new DetalheReceitaDTO(receita);
-        }
-        return null;
+
+        Receita receita = receitaRepository.getReferenceById(id);
+        return new DetalheReceitaDTO(receita);
+
     }
 
     public void deletarReceita(Long id) {
-        repository.deleteById(id);
+        receitaRepository.deleteById(id);
     }
 
     public Receita cadastrarReceita(CadastroReceitaDTO cadastroDTO) {
         Receita receita = new Receita(cadastroDTO.descricao(), cadastroDTO.valor(), cadastroDTO.data());
-        repository.save(receita);
+        receitaRepository.save(receita);
         return receita;
     }
     public DetalheReceitaDTO atualizar(DadosAtualizacaoReceitaDTO dados) {
-        var receita = repository.getReferenceById(dados.id());
+        var receita = receitaRepository.getReferenceById(dados.id());
         if (dados.descricao() != null){
             receita.setDescricao(dados.descricao());
         }
@@ -61,11 +58,11 @@ public class ReceitaService {
     public Page<DetalheReceitaDTO> obterListaReceitaMes(AnoMesDTO anoMes, Pageable paginacao) {
         LocalDate inicioMes = conversaoDateService.obterInicioMes(anoMes);
         LocalDate fimMes = conversaoDateService.obterFimMes(anoMes);
-        return converteLista(repository.listarPorMes(inicioMes, fimMes, paginacao));
+        return converteLista(receitaRepository.listarPorMes(inicioMes, fimMes, paginacao));
     }
 
     public BigDecimal obterSomaReceitaMes(LocalDate inicioMes, LocalDate fimMes) {
-        return repository.obterSomaReceitaMes(inicioMes, fimMes);
+        return receitaRepository.obterSomaReceitaMes(inicioMes, fimMes);
     }
 
     private Page<DetalheReceitaDTO> converteLista(Page<Receita> receitas){
