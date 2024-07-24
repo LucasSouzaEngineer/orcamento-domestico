@@ -50,7 +50,7 @@ public class DespesaController {
 
     @PutMapping
     @Transactional
-    public ResponseEntity atualizarDespesa(@RequestBody DadosAtualizacaoDespesaDTO dados){
+    public ResponseEntity atualizarDespesa(@RequestBody @Valid DadosAtualizacaoDespesaDTO dados){
         DetalheDespesaDTO despesaAtualizada = service.atualizarDespesa(dados);
         return ResponseEntity.ok(despesaAtualizada);
     }

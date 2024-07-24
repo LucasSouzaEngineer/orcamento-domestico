@@ -33,7 +33,8 @@ public class DespesaService {
     }
 
     public void deletarDespesa(Long id) {
-        despesaRepository.deleteById(id);
+        Despesa despesa = despesaRepository.getReferenceById(id);
+        despesaRepository.delete(despesa);
     }
 
     public DetalheDespesaDTO cadastrarDespesa(CadastroDespesaDTO dados) {

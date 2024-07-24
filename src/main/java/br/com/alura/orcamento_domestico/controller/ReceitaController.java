@@ -51,7 +51,7 @@ public class ReceitaController {
 
     @PutMapping
     @Transactional
-    public ResponseEntity atualizarReceita(@RequestBody DadosAtualizacaoReceitaDTO dados){
+    public ResponseEntity atualizarReceita(@RequestBody @Valid DadosAtualizacaoReceitaDTO dados){
         var receitaAtualizada = service.atualizar(dados);
         return ResponseEntity.ok(receitaAtualizada);
     }

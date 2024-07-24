@@ -33,7 +33,8 @@ public class ReceitaService {
     }
 
     public void deletarReceita(Long id) {
-        receitaRepository.deleteById(id);
+        Receita receita = receitaRepository.getReferenceById(id);
+        receitaRepository.delete(receita);
     }
 
     public Receita cadastrarReceita(CadastroReceitaDTO cadastroDTO) {

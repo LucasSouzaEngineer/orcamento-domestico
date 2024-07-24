@@ -8,13 +8,13 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public record CadastroDespesaDTO(
-        @NotBlank
+        @NotBlank(message = "Obrigatório informar descrição")
         String descricao,
-        @NotNull
+        @NotNull(message = "Obrigatório informar valor")
         BigDecimal valor,
-        @NotNull
+        @NotNull(message = "Obrigatório informar data")
         LocalDate data,
-        @NotNull
+        @NotNull(message = "Obrigatório informar Categoria")
         CategoriaDespesa categoria //Usado apenas para despesa
 ){
 }
